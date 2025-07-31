@@ -1,170 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For Pavithra ❤️</title>
+  <meta charset="UTF-8">
+  <title>For Pvithiraa 💖</title>
   <style>
-    /* Reset and base */
-    * {
+    html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      font-family: "Segoe UI", sans-serif;
       overflow: hidden;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: url('1000016394.jpg') no-repeat center center fixed;
+      background-size: cover;
       position: relative;
-      background-color: #000;
+      color: white;
     }
 
-    /* Background image */
-    .bg {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: url('1000016394.jpg') center center/cover no-repeat;
-      z-index: -2;
-      filter: brightness(0.6);
-    }
-
-    /* Dark glass overlay */
-    .overlay {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backdrop-filter: blur(2px);
-      background: rgba(0, 0, 0, 0.2);
-      z-index: -1;
-    }
-
-    /* Message */
-    .message {
+    .message-box {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(255, 255, 255, 0.15);
-      padding: 30px 40px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px 25px;
       border-radius: 20px;
-      box-shadow: 0 0 25px rgba(255, 192, 203, 0.3);
-      color: #fff;
+      box-shadow: 0 0 25px rgba(255, 192, 203, 0.7);
       text-align: center;
       font-size: 1.4rem;
-      line-height: 1.7;
-      animation: fadeIn 3s ease-out forwards;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(6px);
+      color: #fff;
     }
 
-    .message span {
-      display: inline-block;
-      transform: scale(1.05);
-      color: #ff9dcf;
+    .highlight {
+      color: #ff94d4;
+      font-weight: bold;
     }
 
-    /* Heart animation */
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: url('https://i.imgur.com/5cXq4aR.png') no-repeat center/contain;
-      animation: floatUp 6s linear infinite;
-      opacity: 0.8;
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(100vh) scale(1);
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-10vh) scale(1.5);
-        opacity: 0;
-      }
-    }
-
-    /* Sakura flower animation */
-    .sakura {
-      position: absolute;
-      width: 25px;
-      height: 25px;
-      background: url('https://i.imgur.com/GDVuU2V.png') no-repeat center/contain;
-      animation: fall 10s linear infinite;
-      opacity: 0.7;
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(-10%) rotate(0deg);
-      }
-      100% {
-        transform: translateY(110vh) rotate(360deg);
-      }
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translate(-50%, -60%);
-      }
-      100% {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .message {
-        font-size: 1.2rem;
-        padding: 20px 25px;
-      }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
+  <canvas id="flowers"></canvas>
 
-  <div class="bg"></div>
-  <div class="overlay"></div>
-
-  <div class="message">
-    hii <span>pvithiraa</span>.. I'm santhosh. <br/>
-    Enna wait pandre sollitu thoonga poita 🤔 <br/>
-    work pora so tired ah thaa iruppa.. <br/>
+  <div class="message-box">
+    hii <span class="highlight">pvithiraa</span>.. I'm santhosh.<br>
+    Enna wait pandre sollitu thoonga poita 🤔<br>
+    work pora so tired ah thaa iruppa..<br>
     nee thoongu 😌
   </div>
 
-  <!-- Create multiple flowers and hearts -->
   <script>
-    function createPetals() {
-      for (let i = 0; i < 25; i++) {
-        const flower = document.createElement('div');
-        flower.classList.add('sakura');
-        flower.style.left = `${Math.random() * 100}vw`;
-        flower.style.animationDuration = `${6 + Math.random() * 5}s`;
-        flower.style.opacity = Math.random();
-        flower.style.transform = `rotate(${Math.random() * 360}deg)`;
-        document.body.appendChild(flower);
-      }
+    const canvas = document.getElementById('flowers');
+    const ctx = canvas.getContext('2d');
+    let petals = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function createPetal() {
+      return {
+        x: Math.random() * canvas.width,
+        y: -20,
+        size: 20 + Math.random() * 20,
+        speed: 1 + Math.random() * 2,
+        sway: Math.random() * 1,
+        symbol: '🌸',
+        opacity: 0.7 + Math.random() * 0.3
+      };
     }
 
-    function createHearts() {
-      for (let i = 0; i < 15; i++) {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.style.left = `${Math.random() * 100}vw`;
-        heart.style.animationDuration = `${4 + Math.random() * 4}s`;
-        document.body.appendChild(heart);
-      }
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      petals.forEach((p, i) => {
+        ctx.font = `${p.size}px serif`;
+        ctx.globalAlpha = p.opacity;
+        ctx.fillText(p.symbol, p.x, p.y);
+        p.y += p.speed;
+        p.x += Math.sin(p.y / 20) * p.sway;
+
+        if (p.y > canvas.height) {
+          petals[i] = createPetal();
+        }
+      });
+
+      requestAnimationFrame(draw);
     }
 
-    createPetals();
-    createHearts();
+    for (let i = 0; i < 60; i++) petals.push(createPetal());
+    draw();
   </script>
 </body>
 </html>
