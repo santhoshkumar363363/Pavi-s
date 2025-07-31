@@ -1,22 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>For Pvithiraa 💖</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Pvithiraa..</title>
   <style>
-    html, body {
+    body {
       margin: 0;
       padding: 0;
       overflow: hidden;
-      height: 100%;
       font-family: 'Segoe UI', sans-serif;
-    }
-
-    body {
-      background: url('1000016394.jpg') no-repeat center center fixed;
+      background-image: url("1000016575.jpg"); /* Make sure this image is in the same folder */
       background-size: cover;
-      position: relative;
-      color: white;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .message-box {
@@ -24,84 +22,64 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(0, 0, 0, 0.6);
-      padding: 30px 25px;
+      background: rgba(40, 40, 40, 0.8);
+      padding: 20px 30px;
       border-radius: 20px;
-      box-shadow: 0 0 25px rgba(255, 192, 203, 0.7);
+      color: white;
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.6);
       text-align: center;
-      font-size: 1.4rem;
-      backdrop-filter: blur(6px);
-      color: #fff;
+      max-width: 90%;
     }
 
-    .highlight {
-      color: #ff94d4;
+    .message-box span {
+      color: hotpink;
       font-weight: bold;
     }
 
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 0;
+    .flower {
+      position: absolute;
+      color: pink;
+      font-size: 20px;
+      animation: fall linear infinite;
       pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <canvas id="flowers"></canvas>
-
   <div class="message-box">
-    hii <span class="highlight">pvithiraa</span>.. I'm santhosh.<br>
-    Enna wait pandre sollitu thoonga poita 🤔<br>
-    work pora so tired ah thaa iruppa..<br>
-    nee thoongu 😌
+    <p>hii <span>pvithiraa..</span> I'm santhosh.<br>
+      Enna wait pandre sollitu thoonga poita 🤔<br>
+      work pora so tired ah thaa iruppa..<br>
+      nee thoongu 😔</p>
   </div>
 
   <script>
-    const canvas = document.getElementById('flowers');
-    const ctx = canvas.getContext('2d');
-    let petals = [];
+    function createFlower() {
+      const flower = document.createElement("div");
+      flower.classList.add("flower");
+      flower.innerText = "🌸";
+      flower.style.left = Math.random() * window.innerWidth + "px";
+      flower.style.animationDuration = 4 + Math.random() * 5 + "s";
+      flower.style.fontSize = 16 + Math.random() * 20 + "px";
+      document.body.appendChild(flower);
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    function createPetal() {
-      return {
-        x: Math.random() * canvas.width,
-        y: -20,
-        size: 20 + Math.random() * 20,
-        speed: 1 + Math.random() * 2,
-        sway: Math.random() * 1,
-        symbol: '🌸',
-        opacity: 0.7 + Math.random() * 0.3
-      };
+      setTimeout(() => {
+        flower.remove();
+      }, 10000);
     }
 
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      petals.forEach((p, i) => {
-        ctx.font = `${p.size}px serif`;
-        ctx.globalAlpha = p.opacity;
-        ctx.fillText(p.symbol, p.x, p.y);
-        p.y += p.speed;
-        p.x += Math.sin(p.y / 20) * p.sway;
-
-        if (p.y > canvas.height) {
-          petals[i] = createPetal();
-        }
-      });
-
-      requestAnimationFrame(draw);
-    }
-
-    for (let i = 0; i < 60; i++) petals.push(createPetal());
-    draw();
+    setInterval(createFlower, 200);
   </script>
 </body>
 </html>
