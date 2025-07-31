@@ -5,113 +5,166 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>For Pavithra ❤️</title>
   <style>
-    body {
+    /* Reset and base */
+    * {
       margin: 0;
       padding: 0;
-      background: url('1000016394.jpg') no-repeat center center fixed;
-      background-size: cover;
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
-      position: relative;
+      box-sizing: border-box;
     }
 
-    .message-box {
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: "Segoe UI", sans-serif;
+      overflow: hidden;
+      position: relative;
+      background-color: #000;
+    }
+
+    /* Background image */
+    .bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('1000016394.jpg') center center/cover no-repeat;
+      z-index: -2;
+      filter: brightness(0.6);
+    }
+
+    /* Dark glass overlay */
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(2px);
+      background: rgba(0, 0, 0, 0.2);
+      z-index: -1;
+    }
+
+    /* Message */
+    .message {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(255, 255, 255, 0.8);
-      padding: 30px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 30px 40px;
       border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 0 25px rgba(255, 192, 203, 0.3);
+      color: #fff;
       text-align: center;
-      max-width: 90%;
-      animation: fadeIn 2s ease-in-out;
+      font-size: 1.4rem;
+      line-height: 1.7;
+      animation: fadeIn 3s ease-out forwards;
+      backdrop-filter: blur(10px);
     }
 
-    .message-box h1 {
-      font-size: 28px;
-      color: #d63384;
-      margin-bottom: 10px;
+    .message span {
+      display: inline-block;
+      transform: scale(1.05);
+      color: #ff9dcf;
     }
 
-    .message-box p {
-      font-size: 20px;
-      color: #555;
-    }
-
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translate(-50%, -60%); }
-      100% { opacity: 1; transform: translate(-50%, -50%); }
-    }
-
-    /* Floating hearts */
+    /* Heart animation */
     .heart {
       position: absolute;
       width: 20px;
       height: 20px;
-      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center;
-      background-size: contain;
-      animation: floatUp 8s linear infinite;
+      background: url('https://i.imgur.com/5cXq4aR.png') no-repeat center/contain;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.8;
     }
 
     @keyframes floatUp {
       0% {
-        transform: translateY(0) scale(1);
+        transform: translateY(100vh) scale(1);
+        opacity: 0;
+      }
+      50% {
         opacity: 1;
       }
       100% {
-        transform: translateY(-100vh) scale(1.5);
+        transform: translateY(-10vh) scale(1.5);
         opacity: 0;
       }
     }
 
-    /* Flower petals */
-    .petal {
+    /* Sakura flower animation */
+    .sakura {
       position: absolute;
       width: 25px;
       height: 25px;
-      background: url('https://emoji.slack-edge.com/T03A9KUDS/flower/57b16313175f8127781b.png') no-repeat center;
-      background-size: contain;
-      animation: fall 12s linear infinite;
-      opacity: 0.8;
+      background: url('https://i.imgur.com/GDVuU2V.png') no-repeat center/contain;
+      animation: fall 10s linear infinite;
+      opacity: 0.7;
     }
 
     @keyframes fall {
-      0% { transform: translateY(-10%) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+      0% {
+        transform: translateY(-10%) rotate(0deg);
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .message {
+        font-size: 1.2rem;
+        padding: 20px 25px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="message-box">
-    <h1>hii pvithiraa.. I'm santhosh</h1>
-    <p>
-      Enna wait pandre sollitu thoonga poita 🤔<br>
-      work pora so tired ah thaa iruppa.. <br>
-      nee thoongu 😌
-    </p>
+  <div class="bg"></div>
+  <div class="overlay"></div>
+
+  <div class="message">
+    hii <span>pvithiraa</span>.. I'm santhosh. <br/>
+    Enna wait pandre sollitu thoonga poita 🤔 <br/>
+    work pora so tired ah thaa iruppa.. <br/>
+    nee thoongu 😌
   </div>
 
-  <!-- Hearts -->
+  <!-- Create multiple flowers and hearts -->
   <script>
-    for (let i = 0; i < 20; i++) {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (5 + Math.random() * 5) + "s";
-      document.body.appendChild(heart);
+    function createPetals() {
+      for (let i = 0; i < 25; i++) {
+        const flower = document.createElement('div');
+        flower.classList.add('sakura');
+        flower.style.left = `${Math.random() * 100}vw`;
+        flower.style.animationDuration = `${6 + Math.random() * 5}s`;
+        flower.style.opacity = Math.random();
+        flower.style.transform = `rotate(${Math.random() * 360}deg)`;
+        document.body.appendChild(flower);
+      }
     }
 
-    for (let i = 0; i < 20; i++) {
-      const petal = document.createElement('div');
-      petal.classList.add('petal');
-      petal.style.left = Math.random() * 100 + "vw";
-      petal.style.animationDuration = (10 + Math.random() * 5) + "s";
-      document.body.appendChild(petal);
+    function createHearts() {
+      for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.animationDuration = `${4 + Math.random() * 4}s`;
+        document.body.appendChild(heart);
+      }
     }
+
+    createPetals();
+    createHearts();
   </script>
-
 </body>
 </html>
