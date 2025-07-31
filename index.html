@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For Pavithra 💖</title>
+  <title>For Pavithra ❤️</title>
   <style>
     body {
       margin: 0;
@@ -11,82 +11,76 @@
       background: url('1000016394.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Segoe UI', sans-serif;
-      height: 100vh;
       overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      position: relative;
     }
 
     .message-box {
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.8);
       padding: 30px;
-      max-width: 90%;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
       text-align: center;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-      z-index: 2;
+      max-width: 90%;
+      animation: fadeIn 2s ease-in-out;
     }
 
     .message-box h1 {
-      font-size: 1.8rem;
+      font-size: 28px;
       color: #d63384;
       margin-bottom: 10px;
     }
 
     .message-box p {
-      font-size: 1.3rem;
-      color: #444;
-      line-height: 1.6;
+      font-size: 20px;
+      color: #555;
     }
 
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translate(-50%, -60%); }
+      100% { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    /* Floating hearts */
     .heart {
       position: absolute;
       width: 20px;
       height: 20px;
-      background-color: pink;
-      transform: rotate(45deg);
-      animation: floatUp 10s linear infinite;
-    }
-
-    .heart::before,
-    .heart::after {
-      content: "";
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: pink;
-      border-radius: 50%;
-    }
-
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-
-    .heart::after {
-      left: -10px;
-      top: 0;
+      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center;
+      background-size: contain;
+      animation: floatUp 8s linear infinite;
     }
 
     @keyframes floatUp {
       0% {
-        transform: translateY(100vh) rotate(45deg);
+        transform: translateY(0) scale(1);
         opacity: 1;
       }
       100% {
-        transform: translateY(-10vh) rotate(45deg);
+        transform: translateY(-100vh) scale(1.5);
         opacity: 0;
       }
     }
 
-    /* Create multiple hearts */
-    .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
-    .heart:nth-child(2) { left: 25%; animation-delay: 2s; }
-    .heart:nth-child(3) { left: 40%; animation-delay: 4s; }
-    .heart:nth-child(4) { left: 55%; animation-delay: 1s; }
-    .heart:nth-child(5) { left: 70%; animation-delay: 3s; }
-    .heart:nth-child(6) { left: 85%; animation-delay: 5s; }
+    /* Flower petals */
+    .petal {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background: url('https://emoji.slack-edge.com/T03A9KUDS/flower/57b16313175f8127781b.png') no-repeat center;
+      background-size: contain;
+      animation: fall 12s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10%) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -94,19 +88,30 @@
   <div class="message-box">
     <h1>hii pvithiraa.. I'm santhosh</h1>
     <p>
-      Enna wait pandre sollitu thoonga poita 🤔<br/>
-      work pora so tired ah thaa iruppa..<br/>
+      Enna wait pandre sollitu thoonga poita 🤔<br>
+      work pora so tired ah thaa iruppa.. <br>
       nee thoongu 😌
     </p>
   </div>
 
-  <!-- Floating Hearts -->
-  <div class="heart"></div>
-  <div class="heart"></div>
-  <div class="heart"></div>
-  <div class="heart"></div>
-  <div class="heart"></div>
-  <div class="heart"></div>
+  <!-- Hearts -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+      document.body.appendChild(heart);
+    }
+
+    for (let i = 0; i < 20; i++) {
+      const petal = document.createElement('div');
+      petal.classList.add('petal');
+      petal.style.left = Math.random() * 100 + "vw";
+      petal.style.animationDuration = (10 + Math.random() * 5) + "s";
+      document.body.appendChild(petal);
+    }
+  </script>
 
 </body>
 </html>
